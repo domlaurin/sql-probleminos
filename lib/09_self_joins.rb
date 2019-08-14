@@ -116,7 +116,7 @@ def cl_to_lr_by_name
   JOIN
     stops stopb ON (b.stop_id = stopb.id)
   WHERE
-    stopa.name = 'Craiglockhart'
+    stopa.name = 'Craiglockhart' AND
     stopb.name = 'London Road'
 
   SQL
@@ -126,6 +126,20 @@ def haymarket_and_leith
   # Give the company and num of the services that connect stops
   # 115 and 137 ('Haymarket' and 'Leith')
   execute(<<-SQL)
+    SELECT DISTINCT
+    a.company,
+    a.num
+  FROM
+    routes a
+  JOIN
+    routes b ON (a.company = b.company AND a.num = b.num)
+  JOIN
+    stops stopa ON (a.stop_id = stopa.id)
+  JOIN
+    stops stopb ON (b.stop_id = stopb.id)
+  WHERE
+    stopa.name = 'Haymarket' AND
+    stopb.name = 'Leith'
   SQL
 end
 
@@ -133,6 +147,21 @@ def craiglockhart_and_tollcross
   # Give the company and num of the services that connect stops
   # 'Craiglockhart' and 'Tollcross'
   execute(<<-SQL)
+    SELECT DISTINCT
+    a.company,
+    a.num
+  FROM
+    routes a
+  JOIN
+    routes b ON (a.company = b.company AND a.num = b.num)
+  JOIN
+    stops stopa ON (a.stop_id = stopa.id)
+  JOIN
+    stops stopb ON (b.stop_id = stopb.id)
+  WHERE
+    stopa.name = 'Craiglockhart' AND
+    stopb.name = 'Tollcross'
+  
   SQL
 end
 
