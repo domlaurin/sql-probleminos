@@ -29,10 +29,27 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
+CREATE TABLE movies (
+    id integer NOT NULL,
+    title character varying,
+    yr integer,
+    score double precision,
+    votes integer,
+    director_id integer
+);
+
+CREATE TABLE castings (
+    movie_id integer NOT NULL,
+    actor_id integer NOT NULL,
+    ord integer
+);
+
 CREATE TABLE actors (
     id integer NOT NULL,
     name character varying
 );
+
+
 
 CREATE TABLE albums (
     asin character(10) NOT NULL,
@@ -44,11 +61,6 @@ CREATE TABLE albums (
     rank integer
 );
 
-CREATE TABLE castings (
-    movie_id integer NOT NULL,
-    actor_id integer NOT NULL,
-    ord integer
-);
 
 CREATE TABLE countries (
     name character varying NOT NULL,
@@ -63,20 +75,36 @@ CREATE TABLE depts (
     name character varying NOT NULL
 );
 
-CREATE TABLE movies (
-    id integer NOT NULL,
-    title character varying,
-    yr integer,
-    score double precision,
-    votes integer,
-    director_id integer
-);
+
 
 CREATE TABLE nobels (
     yr integer,
     subject character varying,
     winner character varying
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 CREATE TABLE routes (
     num character varying NOT NULL,
@@ -89,6 +117,29 @@ CREATE TABLE stops (
     id integer NOT NULL,
     name character varying
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 CREATE TABLE styles (
     album character(10) NOT NULL,
