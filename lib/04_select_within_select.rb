@@ -134,5 +134,3 @@ def sparse_continents
 
   SQL
 end
-  
-# find continent where all countries have < 2500000 ppl 

@@ -58,6 +58,11 @@ def teachers_and_mobiles
   # 444 2266' if no number is given. Show teacher name and mobile
   # #number or '07986 444 2266'
   execute(<<-SQL)
+  SELECT
+  name, COALESCE (mobile, '07986 444 2266')
+  FROM
+  teachers
+  
   SQL
 end
 
@@ -66,6 +71,11 @@ def teachers_and_depts
   # department name. Use the string 'None' where there is no
   # department.
   execute(<<-SQL)
+    SELECT
+    teachers.name, COALESCE(depts.name, 'None')
+    FROM
+    teachers
+    LEFT JOIN depts ON dept_id = depts.id
   SQL
 end
 
@@ -74,6 +84,10 @@ def num_teachers_and_mobiles
   # mobile phones.
   # NB: COUNT only counts non-NULL values.
   execute(<<-SQL)
+    SELECT
+    COUNT(name), COUNT(mobile)
+    FROM
+    teachers
   SQL
 end
 
@@ -82,6 +96,13 @@ def dept_staff_counts
   # the number of staff. Structure your JOIN to ensure that the
   # Engineering department is listed.
   execute(<<-SQL)
+    SELECT
+    depts.name, COUNT(teachers.name)
+    FROM
+    depts
+    LEFT JOIN teachers ON dept_id = depts.id
+    GROUP BY
+    depts.name
   SQL
 end
 
@@ -89,6 +110,16 @@ def teachers_and_divisions
   # Use CASE to show the name of each teacher followed by 'Sci' if
   # the the teacher is in dept 1 or 2 and 'Art' otherwise.
   execute(<<-SQL)
+    SELECT
+      CASE
+        WHEN id BETWEEN 1 AND 2 THEN
+        name, "Sci"
+        ELSE
+        name, "Art"
+      END
+    FROM
+    teachers
+
   SQL
 end
 
