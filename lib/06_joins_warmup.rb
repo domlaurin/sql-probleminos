@@ -120,9 +120,14 @@ def casablanca_cast
   FROM
   castings
   JOIN actors
-  ON actor_id = id
-  WHERE
-  movie_id = 27
+  ON castings.actor_id = actors.id
+  WHERE movie_id = (
+    SELECT
+    id
+    FROM
+    movies
+    WHERE
+    title = 'Casablanca')
   
   SQL
 end
@@ -132,9 +137,18 @@ def alien_cast
   execute(<<-SQL)
   SELECT
   name
-  FROM 
-  actors, movies, castings
+  FROM
+  actors
+  JOIN castings
+  ON id = actor_id
   WHERE
-  actors.id = castings.actor_id AND movies.id = castings.movie_id AND title = 'Alien'
+  movie_id = (
+    SELECT
+    id
+    FROM
+    movies
+    WHERE
+    title = 'Alien'
+  )
   SQL
 end

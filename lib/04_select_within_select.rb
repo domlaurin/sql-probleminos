@@ -134,3 +134,12 @@ def sparse_continents
 
   SQL
 end
+
+# Find every country that belongs to a continent 
+# where each country's'population is less than 25,000,000. 
+# Show name, continent and population.
+
+# find continents where countries have less than 25,000,000 ppl 
+# list those countries
+
+# find continents where population of more than 25mil doesn't exist
